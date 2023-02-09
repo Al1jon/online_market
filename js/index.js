@@ -17,8 +17,8 @@ function renderPost(array) {
     elCards.innerHTML = '';
     array.forEach(post => {
         elCards.innerHTML += `
-        <div class="card w-25 m-2" style="box-shadow:0 0 30px #a9a9a9;">
-                <img data-id=${post.id} class="image"  src="${post.image}" alt="${post.name}">
+        <div class="card  m-2";  style="box-shadow:0 0 30px #a9a9a9; min-width: 302px">
+                <img data-id=${post.id} class="image" width = "300"  src="${post.image}" alt="${post.name}">
                 <div class="p-2">
                 <h2 data-id=${post.id} class="name">${post.name}</h2>
                 <h4 class="category">${post.category}</h4>
@@ -168,12 +168,12 @@ elAddForm.addEventListener('submit', (event) => {
 elInput.addEventListener('input', () => {
     let newData = [];
     let value = elInput.value;
-    Data.forEach(product => {     
+    Data.forEach(product => {
 
         if (product.name.toLowerCase().includes(value.toLowerCase())) {
             newData.push(product);
         }
-    }); 
+    });
     renderPost(newData);
 })
 
