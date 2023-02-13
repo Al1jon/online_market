@@ -43,7 +43,7 @@ fetch(BASE_URL + 'Products/' + id)
 
 elCards.addEventListener('click', (event) => {
     if (event.target.className.includes('btn-warning')) {
-        window.location.href = 'index.html';
+        window.location.href = 'home.html';
 
     }
 })

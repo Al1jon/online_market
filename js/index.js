@@ -11,13 +11,15 @@ const elInpPrice = document.querySelector('#price');
 const elInpDate = document.querySelector('#date');
 const elBtnAdd = document.querySelector('#btn-add');
 const elModalImg = document.querySelector('.modal-img');
+const elSelect = document.querySelector('#select');
 
 
 function renderPost(array) {
     elCards.innerHTML = '';
     array.forEach(post => {
         elCards.innerHTML += `
-        <div class="card  m-2";  style="box-shadow:0 0 30px #a9a9a9; min-width: 302px">
+        <div class="card  m-2";  style="background: #ecf0f3; box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    } min-width: 302px">
                 <img data-id=${post.id} class="image" width = "300"  src="${post.image}" alt="${post.name}">
                 <div class="p-2">
                 <h2 data-id=${post.id} class="name">${post.name}</h2>
@@ -32,7 +34,7 @@ function renderPost(array) {
     });
 }
 
-var Data;
+var Data = [];
 fetch(BASE_URL + 'Products')
     .then((res) => res.json())
     .then((data) => {
@@ -66,11 +68,12 @@ elCards.addEventListener('click', (event) => {
             .then((res) => res.json())
             .then((data) => {
                 // console.log(data);
+                alert(`ma'lumot muvafaqiyatli o'chirildi`)
 
             })
             .catch((err) => {
                 console.log('error')
-                alert('xato aniqlandi!')
+                alert(`o'chirishda xato aniqlandi!`)
             })
     };
 
@@ -90,7 +93,7 @@ elCards.addEventListener('click', (event) => {
         });
         elForm.addEventListener('submit', (event) => {
 
-            // event.preventDefault();
+            event.preventDefault();
 
             let post = {
                 createdAt: elInpDate.value,
@@ -100,19 +103,21 @@ elCards.addEventListener('click', (event) => {
                 price: elInpPrice.value,
 
             }
-            fetch(BASE_URL + 'Products' + id, {
+            fetch(BASE_URL + 'Products/' + id, {
                 method: 'PUT',
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(post),
 
             })
                 .then((res) => res.json())
                 .then((data) => {
                     console.log(data);
+                    alert(`ma'lumot muvafaqiyatli o'zgartirildi`)
 
                 })
                 .catch((err) => {
                     console.log('error')
-                    alert('xato aniqlandi!')
+                    alert(`o'zgartirishda xato aniqlandi!`)
                 })
 
             console.log(JSON.stringify(post),);
@@ -136,7 +141,7 @@ elBtnAdd.addEventListener('click', () => {
 
 elAddForm.addEventListener('submit', (event) => {
 
-    // event.preventDefault();
+    event.preventDefault();
 
     let post = {
         createdAt: elInpDate.value,
@@ -148,17 +153,18 @@ elAddForm.addEventListener('submit', (event) => {
     }
     fetch(BASE_URL + 'Products', {
         method: 'POST',
+        // headers: { "Content-Type": "application/json" },
         body: JSON.stringify(post),
 
     })
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
-
+            alert(`ma'lumot muvafaqiyatli qo'shildi`)
         })
         .catch((err) => {
             console.log('error')
-            alert('xato aniqlandi!')
+            alert(`qo'shishda xato aniqlandi!`)
         })
 
     console.log(JSON.stringify(post),);
@@ -178,7 +184,57 @@ elInput.addEventListener('input', () => {
 })
 
 
+function renderSelect(array) {
+    let categorys = [];
 
+    array.forEach(element => {
+        if (!categorys.includes(element.category)) {
+            categorys.push(element.category)
+        }
+
+    });
+
+    categorys.forEach(category => {
+        elSelect.innerHTML += `
+        <option class="form-control" value="${category}">${category}</option>   
+        `
+    })
+}
+fetch(BASE_URL + 'Products')
+    .then((res) => res.json())
+    .then((data) => {
+        // console.log(data);
+        renderSelect(data)
+    })
+    .catch((err) => {
+        console.log('error')
+        alert('xato aniqlandi!')
+    })
+
+
+elSelect.addEventListener('change', () => {
+    let value = elSelect.value;
+    console.log(value)
+    var newProduct = [];
+    var filtrArray = [];
+    fetch(BASE_URL + `Products`)
+        .then((res) => res.json())
+        .then((data) => {
+            newProduct = data;
+        })
+        .catch((err) => {
+            console.log('error')
+            alert('xato aniqlandi!')
+        })
+    console.log(newProduct)
+    newProduct.forEach(product => {
+        if (product.category == value) {
+            filtrArray.push(product)
+        }
+    })
+    console.log(filtrArray)
+    renderPost(filtrArray)
+})
 
 
 

@@ -22,15 +22,69 @@
         style="box-shadow: 0 0 30px #8e8e8e; position: fixed; z-index: 4; ">
         <div class="d-flex gap-3 align-items-center">
             <h2 class="text-light">Friends</h2>
-            <h4><a class="text-light text-decoration-none" href="./index.html">Admin</a></h4>
+            <h4><a class="text-light text-decoration-none" href="./login.html">Admin</a></h4>
             <h4 class="text-white-50">Home</h4>
         </div>
-        <input class="form-control w-25" type="search" id="search-input" placeholder="Search friend. . .">
+        <div class="d-flex w-25 gap-2">
+            <button id="btn-add" type="button" class="d-none btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                Friend add
+            </button>
+            <select class="d-none form-control" id="select">
+                <option class="form-control" value="all">All categories</option>
+            </select>
+            <input class="form-control" type="search" id="search-input" placeholder="Search friend. . .">
+            <!-- <select class="form-control" id="select">
+                <option class="form-control" value="all">All</option>            
+            </select> -->
+        </div>  
     </header>
 
 
     <div class="container p-4" style="padding-top: 90px !important;">
-
+        <div class=" d-none modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Product</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form d-none form-control p-4">
+                            <img class="modal-img d-block" src="" alt="avatar">
+                            <label for="">image:</label>
+                            <input id="img" placeholder="img . . ." class="form-control m-2" type="text">
+                            <label for="">name:</label>
+                            <input id="name" placeholder="name . . ." class="form-control m-2" type="text">
+                            <label for="">category:</label>
+                            <input id="category" placeholder="category . . ." class="form-control m-2" type="text">
+                            <label for="">price:</label>
+                            <input id="price" placeholder="price . . ." class="form-control m-2" type="number">
+                            <label for="">date:</label>
+                            <input id="date" placeholder="date . . ." class="form-control m-2" type="datetime-local">
+                            <button type="button" class="btn btn-danger " data-bs-dismiss="modal">Bekor qilish</button>
+                            <button type="submit" class="btn btn-primary m-3" data-bs-dismiss="modal">Saqlash</button>
+                        </form>
+                        <!-- /////////////////// -->
+                        <form class="add-form d-none form-control p-4">
+                            <!-- <img class="modal-img d-block" src="" alt="avatar"> -->
+                            <label for="">image:</label>
+                            <input id="img" placeholder="img . . ." class="form-control m-2" type="text">
+                            <label for="">name:</label>
+                            <input id="name" placeholder="name . . ." class="form-control m-2" type="text">
+                            <label for="">category:</label>
+                            <input id="category" placeholder="category . . ." class="form-control m-2" type="text">
+                            <label for="">price:</label>
+                            <input id="price" placeholder="price . . ." class="form-control m-2" type="number">
+                            <label for="">date:</label>
+                            <input id="date" placeholder="date . . ." class="form-control m-2" type="datetime-local">
+                            <button type="button" class="btn btn-danger " data-bs-dismiss="modal">Bekor qilish</button>
+                            <button type="submit" class="btn btn-primary m-3" data-bs-dismiss="modal">Yuborish</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="cards d-flex flex-wrap justify-content-evenly p-3">
 
